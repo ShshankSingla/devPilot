@@ -5,6 +5,7 @@
 
 # Java / Maven
 backend/target/
+backend/bin/
 backend/.mvn/wrapper/maven-wrapper.jar
 
 # IDE
