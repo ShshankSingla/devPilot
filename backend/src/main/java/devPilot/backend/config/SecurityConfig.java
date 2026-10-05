@@ -24,13 +24,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-        private GithubOAuth2UserService gitHubOAuth2UserService;
-        private AuthenticationSuccessHandler oauth2SuccessHandler;
-        private AuthenticationFailureHandler oauth2FailureHandler;
+        private final GithubOAuth2UserService gitHubOAuth2UserService;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+    SecurityFilterChain securityFilterChain(
+        HttpSecurity http,
+        AuthenticationSuccessHandler oauth2SuccessHandler,
+        AuthenticationFailureHandler oauth2FailureHandler) throws Exception {
+        
         http
                 .cors(Customizer.withDefaults())
 
