@@ -22,7 +22,7 @@ export function getApiBaseUrl(){
 }
 
 export function getGithubLoginUrl(){
-    return `${getApiBaseUrl()}/oauth/authorization/github`;
+    return `${getApiBaseUrl()}/oauth2/authorization/github`;
 }
 
 async function parseError(res: Response) : Promise<string> {
