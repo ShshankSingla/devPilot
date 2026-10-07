@@ -1,29 +1,18 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/use-auth";
-import React from "react";
+import { RequireAuth } from "@/components/providers/require-auth";
+import { AppShell } from "@/components/layout/app-shell";
+//import { RepoDashboard } from "@/components/dashboard/repo-dashboard";
 
-// import { RequireAuth } from "@/components/providers/require-auth";
-// import { AppShell } from "@/components/layout/app-shell";
-// import { RepoDashboard } from "@/components/dashboard/repo-dashboard";
-
-
-const DashboardPage = ()=>{
-    const {data: user, isLoading} = useCurrentUser()
-    console.log(user, isLoading);
-    return(
-        <div>DashboardPage</div>
-    )
+export default function DashboardPage() {
+  return (
+    <RequireAuth>
+      <AppShell hideHeader>
+        <div className="flex min-h-svh items-center justify-center">
+            <h1 className="text-2xl font-bold">Welcome to DevPilot</h1>
+        </div>
+      </AppShell>
+    </RequireAuth>
+  );
 }
-// export default function DashboardPage() {
-//   return (
-//     <RequireAuth>
-//       <AppShell hideHeader>
-//         <RepoDashboard/>
-//       </AppShell>
-//     </RequireAuth>
-//   );
-// }
-
-export default DashboardPage;
     
