@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class GithubAppClient{
+public class GithubApiClient{
     private static final String API_BASE = "https://api.github.com";
 
     //store the repo info
