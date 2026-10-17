@@ -46,7 +46,6 @@ export const dashboardNavGroups: DashboardNavGroup[] = [
   },
 ];
 
-// which nav is active
 export function isDashboardNavActive(
   pathname: string,
   href: string,

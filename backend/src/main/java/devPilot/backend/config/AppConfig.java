@@ -11,16 +11,13 @@ import org.springframework.web.client.RestClient;
 @Configuration
 @EnableAsync
 public class AppConfig {
-    
-    // all the github http calling
     @Bean
-    RestClient.Builder restClientBuilder(){
+    RestClient.Builder restClientBuilder() {
         return RestClient.builder();
     }
-    
-    //repo is indexing in background 
+
     @Bean(name = "indexingExecutor")
-    Executor indexingExecutor(){
+    Executor indexingExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
         executor.setMaxPoolSize(4);

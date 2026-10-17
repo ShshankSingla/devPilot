@@ -1,8 +1,3 @@
-// the client which interact with the github api
-// currently login user ke liye uske private and public repos fetch karega
-
-
-// we are putting a wrapper on rest client
 package devPilot.backend.services.github;
 
 import java.nio.charset.StandardCharsets;
@@ -20,24 +15,19 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class GithubApiClient{
+public class GithubApiClient {
+
     private static final String API_BASE = "https://api.github.com";
 
-    //store the repo info
     private static final ParameterizedTypeReference<List<Map<String, Object>>> LIST_MAP = new ParameterizedTypeReference<>() {
     };
-
-    // store the fie info
     private static final ParameterizedTypeReference<Map<String, Object>> MAP = new ParameterizedTypeReference<>() {
     };
 
     private final RestClient.Builder restClientBuilder;
 
-    //currently login user ke repos ko list karke dedo  - it gives in json fromat
-    public List<Map<String, Object>> listUserRepos(String accessToken) {
-        //an array list which accepts token
+     public List<Map<String, Object>> listUserRepos(String accessToken) {
         List<Map<String, Object>> all = new ArrayList<>();
-
         int page = 1;
         while (page <= 10) {
             final int currentPage = page;
@@ -45,15 +35,13 @@ public class GithubApiClient{
                     .get()
                     .uri(uriBuilder -> uriBuilder
                             .path("/user/repos")
-                            // what we need
                             .queryParam("affiliation", "owner,collaborator,organization_member")
                             .queryParam("sort", "updated")
                             .queryParam("per_page", 100)
                             .queryParam("page", currentPage)
                             .build())
-                            //retrieve the final value
                     .retrieve()
-                    .body(LIST_MAP); // convert json response to java object
+                    .body(LIST_MAP);
             if (pageRepos == null || pageRepos.isEmpty()) {
                 break;
             }
@@ -66,8 +54,6 @@ public class GithubApiClient{
         return all;
     }
 
-// provide the structure
-// ek bar mei ek repo tree
       public Map<String, Object> getRepoTree(String accessToken, String owner, String repo, String branch) {
         return client(accessToken)
                 .get()
@@ -76,13 +62,12 @@ public class GithubApiClient{
                 .body(MAP);
     }
 
-    // provide file content
        public String getFileContent(String accessToken, String owner, String repo, String path) {
         Map<String, Object> body = client(accessToken)
                 .get()
                 .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path)
                 .retrieve()
-                .body(MAP); // conversion
+                .body(MAP);
         if (body == null) {
             return null;
         }
@@ -97,7 +82,7 @@ public class GithubApiClient{
         }
         return String.valueOf(content);
     }
-
+    
     private RestClient client(String accessToken){
           return restClientBuilder
                 .baseUrl(API_BASE)

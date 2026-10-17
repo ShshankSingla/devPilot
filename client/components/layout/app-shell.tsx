@@ -136,7 +136,7 @@ export function AppShell({
                       {user?.displayName}
                     </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      @{user?.githubUserName}
+                      @{user?.githubUsername}
                     </span>
                   </div>
                 </DropdownMenuTrigger>

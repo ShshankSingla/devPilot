@@ -7,11 +7,9 @@ import { useCurrentUser } from "@/hooks/use-auth";
 import { Spinner } from "@/components/ui/spinner";
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
-    // calling useCurrentUser hook
   const { data: user, isLoading, isError } = useCurrentUser();
   const router = useRouter();
 
-  //check
   useEffect(() => {
     if (!isLoading && !user) {
       router.replace("/login");

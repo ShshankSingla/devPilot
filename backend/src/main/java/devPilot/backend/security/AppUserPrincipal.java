@@ -10,40 +10,36 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import devPilot.backend.entity.User;
 
-/**
- * AppUserPrincipal
- */
 public class AppUserPrincipal implements OAuth2User {
 
     private final User user;
     private final Map<String, Object> attributes;
 
-    public AppUserPrincipal(User user, Map<String, Object> attributes){
+    public AppUserPrincipal(User user, Map<String, Object> attributes) {
         this.user = user;
-        this.attributes= attributes;
+        this.attributes = attributes;
     }
 
-    public UUID getId(){
+    public UUID getId() {
         return user.getId();
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 
     @Override
-    public Map<String, Object>getAttributes(){
+    public Map<String, Object> getAttributes() {
         return attributes;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList("ROLE_USER");
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return user.getId().toString();
     }
-
 }

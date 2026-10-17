@@ -37,10 +37,6 @@ const LoginContent = () => {
   const next = params.get("next") || "/dashboard";
   const { data: user, isLoading } = useCurrentUser();
 
-//   const user = null;
-//   const isLoading = false;
-
-// checking that if we are not in loading state and we have a user, so redirect it to and attach the parameter 
   useEffect(() => {
     if (!isLoading && user) {
       router.replace(next.startsWith("/") ? next : "/dashboard");
